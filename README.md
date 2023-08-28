@@ -2,6 +2,8 @@
 
 This is a basic design of a RPG (a very very simple one indeed) implemented via a simple smart contract. We also demonstrate a basic Hardhat use case and later use `wepback` to create a simple website for interacting with the contacts.
 
+This use case also provides a good use case to dwell into the Diamond pattern to address cotracts that are too large (`>= 24 Kb`) and scenarios where a contract needs to be updated (and not deployed to a new address).
+
 ### Game Design and Requirements
 
 - We want to be able to generate random Hereos.
@@ -28,6 +30,7 @@ Stat 3 can max at 16
 
 - `Hello World`: Print "Hello World" to the console.
 - `Counter`: Maintain and increment a simple counter. Use `events` to hook into state changes for the counter instead of traditional `await`s.
+- `Hero`: The contract for the RPG.
 
 ### HardHat Help
 
@@ -35,7 +38,7 @@ Stat 3 can max at 16
 npx hardhat help
 npx hardhat test
 npx hardhat node
-npx hardhat run scripts/deploy.ts
+npx hardhat run scripts/deploy.ts --network localhost
 ```
 
 ### Using Webpack
