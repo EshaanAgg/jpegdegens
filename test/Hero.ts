@@ -5,7 +5,7 @@ import { expect } from "chai";
 describe("Hero", () => {
 	async function createHero() {
 		// Deploy the contract
-		const Hero = await ethers.getContractFactory("Hero");
+		const Hero = await ethers.getContractFactory("TestHero");
 		const hero = await Hero.deploy();
 		await hero.deployed();
 
@@ -33,5 +33,22 @@ describe("Hero", () => {
 
 	it("Should get an empty array of heroes if I haven't bought any heroes", async () => {
 		expect(await hero.getHeroes()).to.deep.equal([]);
+	});
+
+	it("Should create the heroes correctly with the right stats", async () => {
+		const hero = await createHero();
+
+		await hero.setRandom(69);
+		await hero.createHero(0, {
+			value: ethers.utils.parseEther("0.05"),
+		});
+
+		const heroes = await hero.getHeroes();
+		expect(heroes.length).to.equal(1);
+
+		const h = heroes[0];
+		expect(await hero.getClass(h)).to.equal(0);
+		expect(await hero.getMagic(h)).to.equal(16);
+		expect(await hero.getHealth(h)).to.equal(2);
 	});
 });

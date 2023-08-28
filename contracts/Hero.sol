@@ -46,24 +46,28 @@ contract Hero {
     * Do not read or write on the blockchain
     * Getters for all the stats of the hero
     */
-    function getStrength(uint hero) public pure returns (uint) {
-        return (hero >> 2) & 0x1F;
+    function getStrength(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 2) & 0x1F);
     }
 
-    function getHealth(uint hero) public pure returns (uint) {
-        return (hero >> 7) & 0x1F;
+    function getHealth(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 7) & 0x1F);
     }
 
-    function getDexerity(uint hero) public pure returns (uint) {
-        return (hero >> 12) & 0x1F;
+    function getDexerity(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 12) & 0x1F);
     }
 
-    function getIntellect(uint hero) public pure returns (uint) {
-        return (hero >> 17) & 0x1F;
+    function getIntellect(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 17) & 0x1F);
     }
 
-    function getMagic(uint hero) public pure returns (uint) {
-        return (hero >> 22) & 0x1F;
+    function getMagic(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 22) & 0x1F);
+    }
+
+    function getClass(uint hero) public pure returns (uint32) {
+        return uint32(hero & 3);
     }
 
     /* 
