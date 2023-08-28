@@ -1,27 +1,24 @@
 import { ethers } from "hardhat";
+import "@nomiclabs/hardhat-ethers";
 
-async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+async function deploy() {
+	const HelloWorld = await ethers.getContractFactory("HelloWorld");
+	const hello = await HelloWorld.deploy();
+	await hello.deployed();
 
-  const lockedAmount = ethers.parseEther("0.001");
+	return hello;
+}
 
-  const lock = await ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
-
-  await lock.waitForDeployment();
-
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+// @ts-ignore
+async function sayHello(hello) {
+	console.log("Say Hello: ", await hello.hello());
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+deploy()
+	.then(sayHello)
+	.catch((error) => {
+		console.error(error);
+		process.exitCode = 1;
+	});
