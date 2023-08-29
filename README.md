@@ -2,7 +2,7 @@
 
 This is a basic design of a RPG (a very very simple one indeed) implemented via a simple smart contract. We also demonstrate a basic Hardhat use case and later use `wepback` to create a simple website for interacting with the contacts.
 
-This use case also provides a good use case to dwell into the Diamond pattern to address cotracts that are too large (`>= 24 Kb`) and scenarios where a contract needs to be updated (and not deployed to a new address).
+I also try to dwell into the Diamond pattern to address cotracts that are too large (`>= 24 Kb`) and scenarios where a contract needs to be updated (and not deployed to a new address).
 
 ### Game Design and Requirements
 
